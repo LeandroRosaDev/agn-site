@@ -1,26 +1,91 @@
 @import "tailwindcss";
 
+@theme {
+  --color-brand: #ff6b00;
+  --color-brand-hover: #e85d00;
+  --color-brand-soft: #ffb380;
+  --color-brand-tint: #fff3e8;
+  --color-ink: #0b0b0b;
+  --color-graphite: #1a1a1a;
+  --color-muted: #4a4a4a;
+  --color-line: #e6e1d8;
+  --color-canvas: #fafaf7;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  color-scheme: light;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-canvas);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  letter-spacing: -0.03em;
+}
+
+::selection {
+  background: #ff6b00;
+  color: #fff;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-track {
+  animation: marquee 42s linear infinite;
+}
+
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes food-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.food-float {
+  animation: food-float 3.4s ease-in-out infinite;
+}
+
+.hero-wash {
+  background:
+    radial-gradient(900px 480px at 90% 0%, rgb(255 107 0 / 16%), transparent 60%),
+    radial-gradient(640px 380px at 0% 90%, rgb(255 179 128 / 28%), transparent 55%),
+    var(--color-canvas);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .marquee-track,
+  .food-float {
+    animation: none;
+  }
 }
